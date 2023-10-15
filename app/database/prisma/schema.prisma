@@ -1,0 +1,34 @@
+generator client {
+    provider = "prisma-client-py"
+    recursive_type_depth = 5
+}
+
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+model User {
+    id Int @id @default(autoincrement())
+    name String @map("name") @db.VarChar(100)
+    surname String @map("surname") @db.VarChar(255)
+    email String @map("email") @db.VarChar(255)
+    password String @map("password") @db.VarChar(255)
+    address String @map("address") @db.VarChar(255)
+    is_admin Boolean @map("is_admin") @db.Boolean
+    is_verified Boolean @map("is_verified") @db.Boolean
+    verification_code String? @map("verification_code") @db.VarChar(255)
+
+    @@map("users") // table name in postgreSQL
+}
+
+model Route {
+    id Int @id @default(autoincrement())
+    start_location String @map("start_location") @db.VarChar(255)
+    end_location String @map("end_location") @db.VarChar(255)
+    price_per_km Float @map("price_per_km") @db.DoublePrecision
+    distance Float @map("distance") @db.DoublePrecision
+    date_of_execution DateTime @map("date_of_execution") @db.Timestamp(3)
+    
+    @@map("routes") // table name in postgreSQL
+}

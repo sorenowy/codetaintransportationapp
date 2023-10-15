@@ -1,0 +1,4 @@
+fastAPI
+uvicorn
+prisma==0.10.0
+fastapi-mail
